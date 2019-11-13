@@ -1,5 +1,6 @@
 #!/bin/zsh
-dotfiles="vimrc zshrc tmux.conf"
+dir=$(pwd -P)
+dotfiles=(vimrc zshrc tmux.conf)
 
 echo -e "\e[3mRunning bootstrap script\e[0m\n"
 
@@ -26,8 +27,8 @@ echo -e "\n\e[3mAdding symlinks for dotfiles\e[0m\n"
 
 for file in $dotfiles; do
     echo "Symlinking $file"
-    ln -s -f $file ~/.$file
+    ln -sf $dir/.$file ~/.$file
 done
 
 echo "Symlinking alacritty.yml"
-ln -s -f alacritty.yml ~/.config/alacritty/alacritty.yml
+ln -sf $dir/alacritty.yml ~/.config/alacritty/alacritty.yml
