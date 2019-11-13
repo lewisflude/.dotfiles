@@ -23,5 +23,11 @@ export NODE_LOG_LEVEL=DEBUG
 
 [[ $TERM != "screen" ]] && exec tmux
 
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias gc="git commit -m"
+alias ga="git add"
+alias gb="git branch"
+alias gcb="git checkout -b"
+alias gs="git status"
+alias gp="git push"
