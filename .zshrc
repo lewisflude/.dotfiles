@@ -23,3 +23,5 @@ export NODE_LOG_LEVEL=DEBUG
 
 [[ $TERM != "screen" ]] && exec tmux
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
