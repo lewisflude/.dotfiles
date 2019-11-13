@@ -1,12 +1,30 @@
-#!/bin/sh
-files="vimrc zshrc tmux.conf"
+#!/bin/zsh
+dotfiles="vimrc zshrc tmux.conf"
 
-echo "Installing zsh and tmux"
-brew install zsh tmux
+echo -e "\e[3mRunning bootstrap script\e[0m\n"
 
-echo "Adding symlinks for dotfiles"
+which -s brew
+if [[ $? != 0 ]] ; then
+    echo "Installing brew"
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+else
+    echo "Updating brew"
+    brew update
+fi
 
-for file in $files; do
+echo -e "\n\e[3mInstalling packages from brew\e[0m\n"
+brew bundle 
+
+echo "Installing zplugin"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
+
+echo "Installing vim-plug"
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+echo -e "\n\e[3mAdding symlinks for dotfiles\e[0m\n"
+
+for file in $dotfiles; do
     echo "Symlinking $file"
     ln -s -f $file ~/.$file
 done
