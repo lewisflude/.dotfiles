@@ -1,3 +1,4 @@
+brew "stow"
 brew "zsh"
 brew "tmux"
 brew "nvm"
