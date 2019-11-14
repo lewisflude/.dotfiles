@@ -1,5 +1,6 @@
 brew "stow"
 brew "zsh"
 brew "tmux"
+brew "chruby"
 brew "nvm"
 cask "alacritty"
