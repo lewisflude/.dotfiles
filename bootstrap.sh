@@ -2,57 +2,53 @@
 dir=$(pwd -P)
 dotfiles=(alacritty zsh tmux vim)
 
-echo -e "\e[3mRunning bootstrap script\e[0m\n"
-
-which -s brew
-if [[ $? != 0 ]] ; then
-    echo "Installing brew"
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
+print -P "%SRunning bootstrap script%s\n"
 
 if (( $+commands[brew] )); then
-    echo "Brew already installed"
+    print -P "%F{yellow}Brew already installed%f\n"
 else
-    echo "Installing brew"
+    print -P "%F{green}Installing brew%f\n"
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-echo -e "\n\e[3mInstalling packages from brew\e[0m\n"
-brew bundle 
-echo -e "\n"
+print -P "%SInstalling packages from brew%s\n"
 
+brew bundle 
+
+print -P "\n"
 
 if [ -d ~/.zplugin/bin ]; then
-    echo "Zplugin already installed" 
+    print -P "%F{yellow}Zplugin already installed%f\n"
 else
-    echo "Installing zplugin"
+    print -P "%F{green}Installing zplugin%f\n"
     mkdir ~/.zplugin
     git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
 fi
 
 if cat ~/.vim/autoload/plug.vim &> /dev/null; then
-    echo "Vim-plug already installed"
+    print -P "%F{yellow}Vim-plug already installed%f\n"
 else
-    echo "Installing vim-plug"
+    print -P "%F{green}Installing vim-plug%f\n"
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
 
 if (( $+commands[node] )); then
-    echo "Node already installed"
+    print -P "%F{yellow}Installing node%f\n"
 else
-    echo "Installing node"
+    print -P "%F{green}Installing node%f\n"
     . ~/.nvm/nvm.sh
     nvm install node
 fi
 
-echo -e "\n\e[3mAdding symlinks for dotfiles\e[0m\n"
+print -P "%SAdding symlinks for dotfiles%s\n"
+
 
 for file in $dotfiles; do
-    echo "Symlinking $file"
+    print -P "%F{green}Symlinking $file%f"
     stow -t ~/ $file
 done
 
-echo "Symlinking alacritty.yml"
+print -P "%F{green}Symlinking alacritty%f"
 ln -sf $dir/alacritty.yml ~/.config/alacritty/alacritty.yml
