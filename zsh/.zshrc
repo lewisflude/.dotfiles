@@ -21,8 +21,6 @@ chruby ruby
 export NODE_ENV=dev
 export NODE_LOG_LEVEL=DEBUG
 
-[[ $TERM != "screen" ]] && exec tmux
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 alias gc="git commit -m"
