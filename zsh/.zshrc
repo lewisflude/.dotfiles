@@ -23,9 +23,12 @@ export NODE_LOG_LEVEL=DEBUG
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-alias gc="git commit -m"
+alias gc="git commit"
+alias gcm="git commit -m"
 alias ga="git add"
 alias gb="git branch"
 alias gcb="git checkout -b"
 alias gs="git status"
 alias gp="git push"
+alias gpu="git push --set-upstream origin $(git rev-parse — abbrev-ref HEAD)"
+alias gco="git checkout"
